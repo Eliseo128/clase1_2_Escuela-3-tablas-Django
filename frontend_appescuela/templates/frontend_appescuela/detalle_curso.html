@@ -1,0 +1,28 @@
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Detalles del Curso: {{ curso.Nombre }}{% endblock %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h2>Detalles del Curso</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Nombre del Curso:</strong> {{ curso.Nombre }}</p>
+        <p><strong>Cantidad de Créditos:</strong> {{ curso.Creditos }}</p>
+        <p><strong>Estado:</strong> {{ curso.Estado|yesno:"Activo,Inactivo" }}</p>
+
+        <!-- Mostrar imagen si existe -->
+        {% if curso.foto_curso %}
+            <div class="mb-3">
+                <img src="{{ curso.foto_curso.url }}" alt="Foto del curso" class="img-fluid rounded" style="max-width: 300px;">
+            </div>
+        {% else %}
+            <p>No hay imagen disponible.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="d-flex gap-2">
+    <a href="{% url 'frontend_appescuela:editar_curso' curso.id %}" class="btn btn-warning">Editar Curso</a>
+    <a href="{% url 'frontend_appescuela:ver_cursos' %}" class="btn btn-secondary">Volver al Listado</a>
+</div>
+{% endblock %}

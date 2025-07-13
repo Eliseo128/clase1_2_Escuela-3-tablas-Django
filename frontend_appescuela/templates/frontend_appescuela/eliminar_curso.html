@@ -1,0 +1,14 @@
+<!-- eliminar_curso.html -->
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Eliminar Curso{% endblock %}
+{% block content %}
+<h2>¿Estás seguro de eliminar este curso?</h2>
+<p><strong>Nombre:</strong> {{ curso.Nombre }}</p>
+<p><strong>Créditos:</strong> {{ curso.Creditos }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'frontend_appescuela:ver_cursos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

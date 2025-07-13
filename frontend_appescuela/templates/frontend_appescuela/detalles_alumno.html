@@ -1,0 +1,28 @@
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Detalles del Alumno: {{ alumno.NombreCompleto }}{% endblock %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h2>Detalles del Alumno</h2>
+    </div>
+    <div class="card-body">
+        <!-- Mostrar foto -->
+        <div class="mb-3 text-center">
+            {% if alumno.foto_alumno %}
+                <img src="{{ alumno.foto_alumno.url }}" alt="Foto de {{ alumno.NombreCompleto }}" class="img-fluid rounded" style="max-width: 200px;">
+            {% else %}
+                <p>No hay foto disponible.</p>
+            {% endif %}
+        </div>
+
+        <!-- Datos del alumno -->
+        <p><strong>Nombre Completo:</strong> {{ alumno.NombreCompleto }}</p>
+        <p><strong>Número de Control:</strong> {{ alumno.NumControl }}</p>
+        <p><strong>Fecha de Nacimiento:</strong> {{ alumno.FechaNacimiento|date:"d/m/Y" }}</p>
+        <p><strong>Sexo:</strong> {{ alumno.Sexo|yesno:"Masculino,Femenino" }}</p>
+    </div>
+</div>
+
+<!-- Botón para regresar -->
+<a href="{% url 'frontend_appescuela:ver_alumnos' %}" class="btn btn-secondary">Volver al Listado</a>
+{% endblock %}

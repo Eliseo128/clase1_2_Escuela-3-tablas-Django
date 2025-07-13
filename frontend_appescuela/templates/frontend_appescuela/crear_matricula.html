@@ -1,0 +1,28 @@
+<!-- templates/frontend_appescuela/crear_matricula.html -->
+
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Registrar Matrícula{% endblock %}
+{% block content %}
+<h2>Registrar Matrícula</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="Alumno" class="form-label">Alumno</label>
+        <select name="Alumno" id="Alumno" class="form-control" required>
+            {% for alumno in alumnos %}
+            <option value="{{ alumno.id }}">{{ alumno }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="Curso" class="form-label">Curso</label>
+        <select name="Curso" id="Curso" class="form-control" required>
+            {% for curso in cursos %}
+            <option value="{{ curso.id }}">{{ curso }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'frontend_appescuela:listado_matricula' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Editar Curso{% endblock %}
+{% block content %}
+<h2>Editar Curso</h2>
+<form method="post" enctype="multipart/form-data"> <!-- 👈 Importante -->
+    {% csrf_token %}
+    
+    <div class="mb-3">
+        <label for="Nombre" class="form-label">Nombre del Curso</label>
+        <input type="text" name="Nombre" id="Nombre" class="form-control" value="{{ curso.Nombre }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="Creditos" class="form-label">Créditos</label>
+        <input type="number" name="Creditos" id="Creditos" class="form-control" value="{{ curso.Creditos }}" required>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input type="checkbox" name="Estado" id="Estado" class="form-check-input" {% if curso.Estado %}checked{% endif %}>
+        <label for="Estado" class="form-check-label">Curso Activo</label>
+    </div>
+
+    <!-- Campo para subir nueva foto -->
+    <div class="mb-3">
+        <label for="foto_curso" class="form-label">Cambiar Foto del Curso (opcional)</label>
+        <input type="file" name="foto_curso" id="foto_curso" class="form-control" accept="image/*">
+    </div>
+
+    <!-- Mostrar foto actual si existe -->
+    {% if curso.foto_curso %}
+        <div class="mb-3 text-center">
+            <label class="form-label d-block">Foto actual:</label>
+            <img src="{{ curso.foto_curso.url }}" alt="Foto del curso" class="img-fluid rounded" style="max-width: 200px;">
+        </div>
+    {% else %}
+        <p class="text-center text-muted">No hay foto disponible.</p>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a href="{% url 'frontend_appescuela:ver_cursos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

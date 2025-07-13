@@ -1,0 +1,41 @@
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Listado de Alumnos{% endblock %}
+{% block content %}
+<h2>Listado de Alumnos</h2>
+<a href="{% url 'frontend_appescuela:crear_alumno' %}" class="btn btn-success mb-3">Nuevo Alumno</a>
+
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Foto</th>
+            <th>Nombre Completo</th>
+            <th>Número de Control</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Sexo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for alumno in alumnos %}
+        <tr>
+            <td>
+                {% if alumno.foto_alumno %}
+                    <img src="{{ alumno.foto_alumno.url }}" alt="Foto de {{ alumno.NombreCompleto }}" class="img-fluid rounded" style="max-width: 60px; height: auto;">
+                {% else %}
+                    Sin foto
+                {% endif %}
+            </td>
+            <td>{{ alumno.NombreCompleto }}</td>
+            <td>{{ alumno.NumControl }}</td>
+            <td>{{ alumno.FechaNacimiento|date:"d/m/Y" }}</td>
+            <td>{{ alumno.Sexo }}</td>
+            <td>
+                <a href="{% url 'frontend_appescuela:detalle_alumno' alumno.id %}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{% url 'frontend_appescuela:editar_alumno' alumno.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'frontend_appescuela:eliminar_alumno' alumno.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

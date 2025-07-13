@@ -1,0 +1,29 @@
+<!-- listado_matricula.html -->
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Listado de Matrículas{% endblock %}
+{% block content %}
+<h2>Listado de Matrículas</h2>
+<a href="{% url 'frontend_appescuela:crear_matricula' %}" class="btn btn-success mb-3">Registrar Matrícula</a>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Alumno</th>
+            <th>Curso</th>
+            <th>Fecha de Matrícula</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for m in matriculas %}
+        <tr>
+            <td>{{ m.Alumno }}</td>
+            <td>{{ m.Curso }}</td>
+            <td>{{ m.FechaMatricula|date:"d/m/Y H:i" }}</td>
+            <td>
+                <a href="{% url 'frontend_appescuela:eliminar_matricula' m.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

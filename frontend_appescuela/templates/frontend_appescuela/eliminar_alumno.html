@@ -1,0 +1,13 @@
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Eliminar Alumno{% endblock %}
+{% block content %}
+<h2>¿Estás seguro de eliminar este alumno?</h2>
+<p><strong>Nombre:</strong> {{ alumno.NombreCompleto }}</p>
+<p><strong>Número de Control:</strong> {{ alumno.NumControl }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'frontend_appescuela:ver_alumnos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

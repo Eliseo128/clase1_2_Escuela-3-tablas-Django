@@ -1,0 +1,28 @@
+<!-- crear_curso.html -->
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Crear Curso{% endblock %}
+{% block content %}
+<h2>Registrar Nuevo Curso</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="Nombre" class="form-label">Nombre del Curso</label>
+        <input type="text" name="Nombre" id="Nombre" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="Creditos" class="form-label">Créditos</label>
+        <input type="number" name="Creditos" id="Creditos" class="form-control" required>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" name="Estado" id="Estado" class="form-check-input" checked>
+        <label for="Estado" class="form-check-label">Curso Activo</label>
+    </div>
+        <!-- Campo para subir foto -->
+    <div class="mb-3">
+        <label for="foto_curso" class="form-label">Foto del Curso</label>
+        <input type="file" name="foto_curso" id="foto_curso" class="form-control" accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'frontend_appescuela:ver_cursos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

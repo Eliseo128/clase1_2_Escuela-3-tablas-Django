@@ -1,0 +1,42 @@
+{% extends "frontend_appescuela/base.html" %}
+{% block title %}Registrar Alumno{% endblock %}
+{% block content %}
+<h2>Registrar Nuevo Alumno</h2>
+<form method="post" enctype="multipart/form-data"> <!-- 👈 Importante -->
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="ApellidoPaterno" class="form-label">Apellido Paterno</label>
+        <input type="text" name="ApellidoPaterno" id="ApellidoPaterno" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="ApellidoMaterno" class="form-label">Apellido Materno</label>
+        <input type="text" name="ApellidoMaterno" id="ApellidoMaterno" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="Nombres" class="form-label">Nombres</label>
+        <input type="text" name="Nombres" id="Nombres" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="NumControl" class="form-label">Número de Control</label>
+        <input type="text" name="NumControl" id="NumControl" class="form-control" maxlength="8" required>
+    </div>
+    <div class="mb-3">
+        <label for="FechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+        <input type="date" name="FechaNacimiento" id="FechaNacimiento" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="Sexo" class="form-label">Sexo</label>
+        <select name="Sexo" id="Sexo" class="form-control" required>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+        </select>
+    </div>
+        <!-- Campo para subir foto -->
+    <div class="mb-3">
+        <label for="foto_alumno" class="form-label">Foto del Alumno</label>
+        <input type="file" name="foto_alumno" id="foto_alumno" class="form-control" accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'frontend_appescuela:ver_alumnos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
